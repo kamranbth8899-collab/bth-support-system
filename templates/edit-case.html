@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Case</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Edit Case: {{ case_number }}</div>
+
+  <nav>
+    <a href="/admin">Back to Admin</a>
+    <a href="/logout">Logout</a>
+  </nav>
+</header>
+
+<section class="form-page">
+
+  <h1>Edit Case: {{ case_number }}</h1>
+
+  {% if case_type == "warranty" %}
+
+  <form class="support-form" method="POST">
+
+    <input type="text" name="full_name" value="{{ case_data[3] }}" placeholder="Full Name" required>
+    <input type="text" name="phone" value="{{ case_data[4] }}" placeholder="Telephone / WhatsApp" required>
+    <input type="email" name="email" value="{{ case_data[5] }}" placeholder="Email Address" required>
+    <input type="text" name="country" value="{{ case_data[6] }}" placeholder="Country" required>
+
+    <select name="product_category" required>
+      <option {% if case_data[7] == 'Pottery Wheel' %}selected{% endif %}>Pottery Wheel</option>
+      <option {% if case_data[7] == 'Kiln' %}selected{% endif %}>Kiln</option>
+      <option {% if case_data[7] == 'Slab Roller' %}selected{% endif %}>Slab Roller</option>
+      <option {% if case_data[7] == 'Accessory' %}selected{% endif %}>Accessory</option>
+    </select>
+
+    <input type="text" name="product_model" value="{{ case_data[8] }}" placeholder="Product Model" required>
+    <input type="text" name="serial_number" value="{{ case_data[9] }}" placeholder="Product Serial Number" required>
+    <input type="date" name="purchase_date" value="{{ case_data[10] }}" required>
+    <input type="text" name="distributor" value="{{ case_data[11] }}" placeholder="Purchase Channel / Distributor" required>
+
+    <button type="submit">Save Changes</button>
+
+  </form>
+
+  {% elif case_type == "after-sales" %}
+
+  <form class="support-form" method="POST">
+
+    <input type="text" name="customer_name" value="{{ case_data[3] }}" placeholder="Customer Name" required>
+    <input type="email" name="email" value="{{ case_data[4] }}" placeholder="Email Address" required>
+    <input type="text" name="phone" value="{{ case_data[5] }}" placeholder="WhatsApp / Phone" required>
+    <input type="text" name="product_model" value="{{ case_data[6] }}" placeholder="Product Model" required>
+    <input type="text" name="serial_number" value="{{ case_data[7] }}" placeholder="Serial Number" required>
+
+    <select name="issue_type" required>
+      <option {% if case_data[8] == 'Machine not working' %}selected{% endif %}>Machine not working</option>
+      <option {% if case_data[8] == 'Foot pedal issue' %}selected{% endif %}>Foot pedal issue</option>
+      <option {% if case_data[8] == 'Noise problem' %}selected{% endif %}>Noise problem</option>
+      <option {% if case_data[8] == 'Wheelhead issue' %}selected{% endif %}>Wheelhead issue</option>
+      <option {% if case_data[8] == 'Electrical issue' %}selected{% endif %}>Electrical issue</option>
+      <option {% if case_data[8] == 'Damaged during shipping' %}selected{% endif %}>Damaged during shipping</option>
+      <option {% if case_data[8] == 'Other' %}selected{% endif %}>Other</option>
+    </select>
+
+    <textarea name="issue_description" placeholder="Issue Description" required>{{ case_data[9] }}</textarea>
+    <textarea name="notes" placeholder="Additional Notes">{{ case_data[10] }}</textarea>
+
+    <button type="submit">Save Changes</button>
+
+  </form>
+
+  {% endif %}
+
+</section>
+
+</body>
+</html>

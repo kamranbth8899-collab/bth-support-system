@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+  <div class="logo">BTH Admin Dashboard</div>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/admin">Admin</a>
+    <a href="/logout">Logout</a>
+  </nav>
+</header>
+
+<section class="form-page">
+
+  <h1>Business Analytics Dashboard</h1>
+
+  <div style="margin-top:30px; margin-bottom:50px; text-align:center;">
+
+    <a
+      class="btn"
+      href="/export/warranty"
+      style="margin-right:15px;"
+    >
+      Export Warranty Excel
+    </a>
+
+    <a
+      class="btn"
+      href="/export/after-sales"
+    >
+      Export After-Sales Excel
+    </a>
+
+  </div>
+
+  <div class="dashboard-cards">
+
+    <div class="dashboard-card">
+      <h3>Total Warranty</h3>
+      <p>{{ customers|length }}</p>
+    </div>
+
+    <div class="dashboard-card">
+      <h3>Total After-Sales</h3>
+      <p>{{ after_sales_requests|length }}</p>
+    </div>
+
+    <div class="dashboard-card">
+      <h3>Pending Cases</h3>
+      <p>{{ pending_count }}</p>
+    </div>
+
+    <div class="dashboard-card">
+      <h3>Solved Cases</h3>
+      <p>{{ solved_count }}</p>
+    </div>
+
+  </div>
+
+
+  <h1 style="margin-top:80px;">Warranty Registrations</h1>
+
+  <form method="GET" action="/admin" class="admin-search">
+
+    <input
+      type="text"
+      name="search"
+      placeholder="Search by case number, name, email, or serial number"
+      value="{{ search }}"
+    >
+
+    <button type="submit">Search</button>
+
+    <a class="btn" href="/admin">Reset</a>
+
+  </form>
+
+  <div class="table-container">
+
+    <table>
+
+      <tr>
+        <th>Case</th>
+        <th>Status</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Country</th>
+        <th>Model</th>
+        <th>Serial</th>
+        <th>Created Date</th>
+        <th>Updated Date</th>
+        <th>Completion Date</th>
+        <th>Action</th>
+      </tr>
+
+      {% for customer in customers %}
+
+      <tr>
+
+        <td>
+          <a href="/case/warranty/{{ customer[1] }}">
+            {{ customer[1] }}
+          </a>
+        </td>
+
+        <td>
+
+          <form method="POST" action="/update-status">
+
+            <input type="hidden" name="table" value="warranty">
+
+            <input type="hidden" name="case_id" value="{{ customer[0] }}">
+
+            <select name="status" onchange="this.form.submit()">
+
+              <option {% if customer[2] == 'Pending' %}selected{% endif %}>
+                Pending
+              </option>
+
+              <option {% if customer[2] == 'In Progress' %}selected{% endif %}>
+                In Progress
+              </option>
+
+              <option {% if customer[2] == 'Waiting Parts' %}selected{% endif %}>
+                Waiting Parts
+              </option>
+
+              <option {% if customer[2] == 'Solved' %}selected{% endif %}>
+                Solved
+              </option>
+
+              <option {% if customer[2] == 'Closed' %}selected{% endif %}>
+                Closed
+              </option>
+
+            </select>
+
+          </form>
+
+        </td>
+
+        <td>{{ customer[3] }}</td>
+        <td>{{ customer[4] }}</td>
+        <td>{{ customer[5] }}</td>
+        <td>{{ customer[6] }}</td>
+        <td>{{ customer[8] }}</td>
+        <td>{{ customer[9] }}</td>
+        <td>{{ customer[12] }}</td>
+        <td>{{ customer[13] }}</td>
+        <td>{{ customer[14] }}</td>
+
+        <td>
+
+          <a
+            class="btn-small"
+            href="/edit-case/warranty/{{ customer[1] }}"
+          >
+            Edit
+          </a>
+
+          <form
+            method="POST"
+            action="/delete-case"
+            style="display:inline;"
+          >
+
+            <input type="hidden" name="case_type" value="warranty">
+
+            <input
+              type="hidden"
+              name="case_number"
+              value="{{ customer[1] }}"
+            >
+
+            <button
+              type="submit"
+              class="btn-danger"
+              onclick="return confirm('Are you sure you want to delete this case? This action cannot be undone.')"
+            >
+              Delete
+            </button>
+
+          </form>
+
+        </td>
+
+      </tr>
+
+      {% endfor %}
+
+    </table>
+
+  </div>
+
+
+  <h1 style="margin-top:80px;">After-Sales Requests</h1>
+
+  <div class="table-container">
+
+    <table>
+
+      <tr>
+        <th>Case</th>
+        <th>Status</th>
+        <th>Customer</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Model</th>
+        <th>Serial</th>
+        <th>Issue</th>
+        <th>Created Date</th>
+        <th>Updated Date</th>
+        <th>Completion Date</th>
+        <th>Action</th>
+      </tr>
+
+      {% for request in after_sales_requests %}
+
+      <tr>
+
+        <td>
+          <a href="/case/after-sales/{{ request[1] }}">
+            {{ request[1] }}
+          </a>
+        </td>
+
+        <td>
+
+          <form method="POST" action="/update-status">
+
+            <input type="hidden" name="table" value="after_sales">
+
+            <input type="hidden" name="case_id" value="{{ request[0] }}">
+
+            <select name="status" onchange="this.form.submit()">
+
+              <option {% if request[2] == 'Pending' %}selected{% endif %}>
+                Pending
+              </option>
+
+              <option {% if request[2] == 'In Progress' %}selected{% endif %}>
+                In Progress
+              </option>
+
+              <option {% if request[2] == 'Waiting Parts' %}selected{% endif %}>
+                Waiting Parts
+              </option>
+
+              <option {% if request[2] == 'Solved' %}selected{% endif %}>
+                Solved
+              </option>
+
+              <option {% if request[2] == 'Closed' %}selected{% endif %}>
+                Closed
+              </option>
+
+            </select>
+
+          </form>
+
+        </td>
+
+        <td>{{ request[3] }}</td>
+        <td>{{ request[4] }}</td>
+        <td>{{ request[5] }}</td>
+        <td>{{ request[6] }}</td>
+        <td>{{ request[7] }}</td>
+        <td>{{ request[8] }}</td>
+        <td>{{ request[11] }}</td>
+        <td>{{ request[12] }}</td>
+        <td>{{ request[13] }}</td>
+
+        <td>
+
+          <a
+            class="btn-small"
+            href="/edit-case/after-sales/{{ request[1] }}"
+          >
+            Edit
+          </a>
+
+          <form
+            method="POST"
+            action="/delete-case"
+            style="display:inline;"
+          >
+
+            <input
+              type="hidden"
+              name="case_type"
+              value="after-sales"
+            >
+
+            <input
+              type="hidden"
+              name="case_number"
+              value="{{ request[1] }}"
+            >
+
+            <button
+              type="submit"
+              class="btn-danger"
+              onclick="return confirm('Are you sure you want to delete this case? This action cannot be undone.')"
+            >
+              Delete
+            </button>
+
+          </form>
+
+        </td>
+
+      </tr>
+
+      {% endfor %}
+
+    </table>
+
+  </div>
+
+</section>
+
+
+{% if deleted == "1" %}
+<script>
+  alert("Case deleted successfully.");
+</script>
+{% endif %}
+
+{% if updated == "1" %}
+<script>
+  alert("Case updated successfully.");
+</script>
+{% endif %}
+
+
+</body>
+</html>

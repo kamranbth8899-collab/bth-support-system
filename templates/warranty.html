@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warranty Registration</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+  <div class="logo">BTH Ceramic Equipment</div>
+  <nav>
+  <a href="/">Home</a>
+  <a href="/products">Products</a>
+  <a href="/support">Support</a>
+  <a href="/warranty">Warranty</a>
+  <a href="/after-sales">After-Sales</a>
+  <a href="/contact">Contact</a>
+</nav>
+</header>
+
+<section class="form-page">
+  <h1>BTH Product Registration & Warranty Activation</h1>
+  <p>Warranty period begins from the registration date.</p>
+
+  <form class="support-form" action="/warranty" method="POST" enctype="multipart/form-data">
+
+    <input type="text" name="full_name" placeholder="Full Name" required>
+    <input type="text" name="phone" placeholder="Telephone / WhatsApp" required>
+    <input type="email" name="email" placeholder="Email Address" required>
+    <input type="text" name="country" placeholder="Country" required>
+
+    <select name="product_category" required>
+      <option value="">Select Product Category</option>
+      <option>Pottery Wheel</option>
+      <option>Kiln</option>
+      <option>Slab Roller</option>
+      <option>Accessory</option>
+    </select>
+
+    <input type="text" name="product_model" placeholder="Product Model" required>
+    <input type="text" name="serial_number" placeholder="Product Serial Number" required>
+    <input type="date" name="purchase_date" required>
+    <input type="text" name="distributor" placeholder="Purchase Channel / Distributor" required>
+
+    <label>Upload Product Nameplate Photo</label>
+    <input type="file" name="nameplate_photo">
+
+    <label>Upload Purchase Invoice Optional</label>
+    <input type="file" name="invoice">
+
+    <button type="submit">Submit Warranty Registration</button>
+
+  </form>
+</section>
+
+<footer>
+  <p>© 2026 BTH Ceramic Equipment</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTH Ceramic Equipment</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="main-header">
+
+    <div class="header-left">
+
+        <div class="top-contact">
+
+            <a href="mailto:technicalsupport@jdzbth.com"
+               class="header-contact">
+                ✉ technicalsupport@jdzbth.com
+            </a>
+
+            <a href="https://wa.me/18588159282"
+               target="_blank"
+               class="whatsapp-header">
+                WhatsApp
+            </a>
+
+        </div>
+
+        <div class="logo">
+            BTH Ceramic Equipment
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a href="/">Home</a>
+        <a href="/products">Products</a>
+        <a href="/support">Support Center</a>
+        <a href="/contact">Contact</a>
+
+    </nav>
+
+</header>
+
+
+<!-- FULL HERO -->
+
+<section class="hero-full">
+
+    <div class="hero-overlay">
+
+        <h1>
+            Professional Ceramic Equipment Manufacturer
+        </h1>
+
+        <p>
+            Pottery Wheels, Kilns, Slab Rollers,
+            and Global Technical Support Solutions
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="/products" class="hero-btn">
+                Explore Products
+            </a>
+
+            <a href="/support" class="hero-btn secondary-btn">
+                Support Center
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section class="home-section">
+
+    <h1>Our Products</h1>
+
+    <div class="product-grid">
+
+        <div class="card">
+
+            <img
+                src="{{ url_for('static', filename='images/dd03-wheel.jpg') }}"
+                alt="Pottery Wheel"
+            >
+
+            <h2>Pottery Wheels</h2>
+
+            <p>
+                Professional pottery wheels for studios,
+                schools, and ceramic artists.
+            </p>
+
+            <a href="/products" class="btn">
+                Learn More
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="{{ url_for('static', filename='images/kiln.jpg') }}"
+                alt="Kiln"
+            >
+
+            <h2>Kilns</h2>
+
+            <p>
+                Reliable ceramic kilns with technical
+                support and operation resources.
+            </p>
+
+            <a href="/products" class="btn">
+                Learn More
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="{{ url_for('static', filename='images/slab-roller.png') }}"
+                alt="Slab Roller"
+            >
+
+            <h2>Slab Rollers</h2>
+
+            <p>
+                Durable slab rollers for ceramic classrooms,
+                studios, and production spaces.
+            </p>
+
+            <a href="/products" class="btn">
+                Learn More
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- WHY CHOOSE BTH -->
+
+<section class="why-bth">
+
+    <h1>Why Choose BTH</h1>
+
+    <div class="why-grid">
+
+        <div class="why-card">
+
+            <h3>Professional Equipment</h3>
+
+            <p>
+                Designed for ceramic artists,
+                studios, schools, and distributors.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <h3>Global Support</h3>
+
+            <p>
+                Installation videos, troubleshooting guides,
+                manuals, and after-sales service.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <h3>Reliable Manufacturing</h3>
+
+            <p>
+                Focused on quality, performance,
+                and long-term customer service.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 BTH Ceramic Equipment
+    </p>
+
+</footer>
+
+</body>
+</html>

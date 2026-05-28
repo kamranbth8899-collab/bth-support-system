@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Center</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">BTH Ceramic Equipment</div>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/products">Products</a>
+    <a href="/support">Support Center</a>
+    <a href="/contact">Contact</a>
+  </nav>
+
+</header>
+
+
+<section class="support-page">
+
+  <h1>Support Center</h1>
+
+  <p class="support-intro">
+    Select your product category and support topic.
+  </p>
+
+
+  <div class="support-tree">
+
+    <!-- POTTERY WHEEL -->
+
+    <div class="support-category">
+
+      <h2 onclick="toggleSupport(this)">
+        Pottery Wheels
+      </h2>
+
+      <ul>
+
+        <li>
+          <a href="/support/pottery-wheel/installation">
+            Installation
+          </a>
+        </li>
+
+        <li>
+          <a href="/support/pottery-wheel/troubleshooting">
+            Troubleshooting
+          </a>
+        </li>
+
+        <li>
+          <a href="/support/pottery-wheel/downloads">
+            Downloads
+          </a>
+        </li>
+
+        <li>
+          <a href="/support/pottery-wheel/faq">
+            FAQ
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <!-- KILN -->
+
+    <div class="support-category">
+
+      <h2 onclick="toggleSupport(this)">
+        Kilns
+      </h2>
+
+      <ul>
+
+        <li>
+          <a href="/support/kiln/installation">
+            Installation
+          </a>
+        </li>
+
+        <li>
+          <a href="/support/kiln/troubleshooting">
+            Troubleshooting
+          </a>
+        </li>
+
+        <li>
+          <a href="/support/kiln/downloads">
+            Downloads
+          </a>
+        </li>
+
+        <li>
+          <a href="/support/kiln/faq">
+            FAQ
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <!-- SLAB ROLLER -->
+
+    <div class="support-category">
+
+      <h2 onclick="toggleSupport(this)">
+        Slab Rollers
+      </h2>
+
+      <ul>
+
+        <li>
+          <a href="/support/slab-roller/installation">
+            Installation
+          </a>
+        </li>
+
+        <li>
+          <a href="/support/slab-roller/troubleshooting">
+            Troubleshooting
+          </a>
+        </li>
+
+        <li>
+          <a href="/support/slab-roller/downloads">
+            Downloads
+          </a>
+        </li>
+
+        <li>
+          <a href="/support/slab-roller/faq">
+            FAQ
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <!-- SPECIAL -->
+
+    <div class="support-category special">
+
+      <h2>
+        <a href="/warranty">
+          Warranty Registration
+        </a>
+      </h2>
+
+    </div>
+
+
+    <div class="support-category special">
+
+      <h2>
+        <a href="/after-sales">
+          Technical Support
+        </a>
+      </h2>
+
+    </div>
+
+
+    <div class="support-category special">
+
+      <h2>
+        <a href="/track">
+          Track Your Case
+        </a>
+      </h2>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer>
+  <p>© 2026 BTH Ceramic Equipment</p>
+</footer>
+
+
+<script>
+
+function toggleSupport(heading) {
+
+  const list = heading.nextElementSibling;
+
+  if (!list) return;
+
+  if (list.style.display === "block") {
+
+    list.style.display = "none";
+
+  } else {
+
+    list.style.display = "block";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>

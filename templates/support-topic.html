@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Topic</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        BTH Support Center
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/support">Support Center</a>
+        <a href="/contact">Contact</a>
+    </nav>
+
+</header>
+
+
+<section class="support-topic-page">
+
+    <h1>
+        {{ product_name }} - {{ topic_name }}
+    </h1>
+
+
+    <div class="support-topic-card">
+
+        <h2>Support Resources</h2>
+
+
+        <!-- POTTERY WHEEL INSTALLATION -->
+
+        {% if product == "pottery-wheel" and topic == "installation" %}
+
+            <div class="video-embed">
+
+                <h3>DD03 Pottery Wheel | Unboxing & Installation Guide</h3>
+
+                <iframe
+                    src="https://www.youtube.com/embed/tDtXa-C4SeI"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+            <div class="video-embed">
+
+                <h3>BP02 Pottery Wheel | Unboxing & Installation Guide</h3>
+
+                <iframe
+                    src="https://www.youtube.com/embed/E3NfQNl2QRU"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+
+        <!-- POTTERY WHEEL TROUBLESHOOTING -->
+
+        {% elif product == "pottery-wheel" and topic == "troubleshooting" %}
+
+            <div class="video-embed">
+
+                <h3>DD03 Pottery Wheel | Reset & System Recovery Guide</h3>
+
+                <iframe
+                    src="https://www.youtube.com/embed/WoAkgE6ATp0"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+            <div class="video-embed">
+
+                <h3>DD03 Pottery Wheel | Splash Pan, Extension Legs & Wheelhead Replacement Guide</h3>
+
+                <iframe
+                    src="https://www.youtube.com/embed/7odrhGrqgjE"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+            <div class="video-embed">
+
+                <h3>DD03 Pottery Wheel | Main Board & Motor Cover Replacement Guide</h3>
+
+                <iframe
+                    src="https://www.youtube.com/embed/kGdXvVlWN3Y"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+            <div class="video-embed">
+
+                <h3>BP02 Pottery Wheel | Main Board, Motor & Belt Replacement Guide</h3>
+
+                <iframe
+                    src="https://www.youtube.com/embed/VcYwbyLhzXU"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+            <div class="video-embed">
+
+                <h3>BP02-Pottery Wheel Making a Buzzing Sound</h3>
+
+                <iframe
+                    src="https://www.youtube.com/embed/AXmFW3lkSeQ"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+            <div class="video-embed">
+
+                <h3>Pottery Wheel Thumping Sound Explanation</h3>
+
+                <iframe
+                    src="https://www.youtube.com/embed/7TvtFO0pGz4"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+
+        <!-- POTTERY WHEEL DOWNLOADS -->
+
+        {% elif product == "pottery-wheel" and topic == "downloads" %}
+
+            <div class="resource-box">
+
+                <h3>Pottery Wheel Downloads</h3>
+
+                <div class="video-links">
+
+                    <a href="/manuals/pottery-wheel/BP02_User_Manual.pdf"
+                       class="video-button">
+                        BP02 User Manual
+                    </a>
+
+                    <a href="/manuals/pottery-wheel/DD03_User_Manual.pdf"
+                       class="video-button">
+                        DD03 User Manual
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        <!-- KILN -->
+
+        {% elif product == "kiln" and topic == "installation" %}
+
+            <div class="video-embed">
+
+                <h3>TaoGu Kiln | Installation & Operation Guide</h3>
+
+                <iframe
+                    src="https://www.youtube.com/embed/Zz9Xqsgg12s"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+
+        {% elif product == "kiln" and topic == "downloads" %}
+
+            <div class="resource-box">
+
+                <h3>Kiln Downloads</h3>
+
+                <div class="video-links">
+
+                    <a href="/manuals/kiln/TaoGu_Kiln_Manual.pdf"
+                       class="video-button">
+                        TaoGu Kiln User Manual
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        <!-- SLAB ROLLER -->
+
+        {% elif product == "slab-roller" and topic == "installation" %}
+
+            <div class="video-embed">
+
+                <h3>NBJ-S2 Slab Roller | Installation & Setup Guide</h3>
+
+                <iframe
+                    src="https://www.youtube.com/embed/DDqGP_nC8Ws"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+            <div class="video-embed">
+
+                <h3>INB-SD01A Slab Roller | Installation Guide</h3>
+
+                <iframe
+                    src="https://www.youtube.com/embed/7-JAipkZOo4"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+
+        <!-- FAQ -->
+
+        {% elif topic == "faq" %}
+
+            <div class="resource-box">
+
+                <h3>Frequently Asked Questions</h3>
+
+                <p>
+                    FAQ content will be updated continuously.
+                </p>
+
+            </div>
+
+
+        {% else %}
+
+            <div class="resource-box">
+
+                <h3>Support Resources</h3>
+
+                <p>
+                    Support resources will be updated soon.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<footer>
+    <p>© 2026 BTH Ceramic Equipment</p>
+</footer>
+
+</body>
+</html>

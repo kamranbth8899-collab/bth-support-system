@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Detail</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">BTH Case Detail</div>
+
+    <nav>
+        <a href="/admin">Back to Admin</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+
+<section class="form-page">
+
+    <h1>Case Detail: {{ case_number }}</h1>
+
+    <div class="contact-box">
+
+        {% if case_data %}
+
+            {% if case_type == "warranty" %}
+
+                <h2>Warranty Case Information</h2>
+
+                <p><strong>Case Number:</strong> {{ case_data[1] }}</p>
+                <p><strong>Status:</strong> {{ case_data[2] }}</p>
+                <p><strong>Customer Name:</strong> {{ case_data[3] }}</p>
+                <p><strong>Phone:</strong> {{ case_data[4] }}</p>
+                <p><strong>Email:</strong> {{ case_data[5] }}</p>
+                <p><strong>Country:</strong> {{ case_data[6] }}</p>
+                <p><strong>Product Category:</strong> {{ case_data[7] }}</p>
+                <p><strong>Product Model:</strong> {{ case_data[8] }}</p>
+                <p><strong>Serial Number:</strong> {{ case_data[9] }}</p>
+                <p><strong>Purchase Date:</strong> {{ case_data[10] }}</p>
+                <p><strong>Distributor:</strong> {{ case_data[11] }}</p>
+                <p><strong>Created Date:</strong> {{ case_data[12] }}</p>
+                <p><strong>Last Updated:</strong> {{ case_data[13] }}</p>
+                <p><strong>Completion Date:</strong> {{ case_data[14] }}</p>
+
+                <form method="POST" action="/update-notes" class="support-form" style="margin-top:30px;">
+                    <input type="hidden" name="case_type" value="warranty">
+                    <input type="hidden" name="case_number" value="{{ case_number }}">
+
+                    <label>Internal Technician Notes</label>
+                    <textarea name="internal_notes">{{ case_data[15] }}</textarea>
+
+                    <button type="submit">Save Notes</button>
+                </form>
+
+            {% elif case_type == "after-sales" %}
+
+                <h2>After-Sales Case Information</h2>
+
+                <p><strong>Case Number:</strong> {{ case_data[1] }}</p>
+                <p><strong>Status:</strong> {{ case_data[2] }}</p>
+                <p><strong>Customer Name:</strong> {{ case_data[3] }}</p>
+                <p><strong>Email:</strong> {{ case_data[4] }}</p>
+                <p><strong>Phone:</strong> {{ case_data[5] }}</p>
+                <p><strong>Product Model:</strong> {{ case_data[6] }}</p>
+                <p><strong>Serial Number:</strong> {{ case_data[7] }}</p>
+                <p><strong>Purchase Channel / Distributor:</strong> {{ case_data[8] }}</p>
+                <p><strong>Issue Type:</strong> {{ case_data[9] }}</p>
+                <p><strong>Issue Description:</strong> {{ case_data[10] }}</p>
+                <p><strong>Customer Notes:</strong> {{ case_data[11] }}</p>
+                <p><strong>Created Date:</strong> {{ case_data[12] }}</p>
+                <p><strong>Last Updated:</strong> {{ case_data[13] }}</p>
+                <p><strong>Completion Date:</strong> {{ case_data[14] }}</p>
+
+                <form method="POST" action="/update-notes" class="support-form" style="margin-top:30px;">
+                    <input type="hidden" name="case_type" value="after-sales">
+                    <input type="hidden" name="case_number" value="{{ case_number }}">
+
+                    <label>Internal Technician Notes</label>
+                    <textarea name="internal_notes">{{ case_data[15] }}</textarea>
+
+                    <button type="submit">Save Notes</button>
+                </form>
+
+            {% endif %}
+
+        {% else %}
+
+            <p>No case data found.</p>
+
+        {% endif %}
+
+    </div>
+
+
+    <h1 style="margin-top:70px;">Attachments</h1>
+
+    <div class="attachment-grid">
+
+        {% for file in attachments %}
+
+            <div class="attachment-card">
+
+                <h3>{{ file }}</h3>
+
+                {% if file.endswith('.jpg') or file.endswith('.png') or file.endswith('.jpeg') %}
+
+                    <img
+                        src="/uploads/{{ case_number }}/{{ file }}"
+                        class="attachment-image"
+                    >
+
+                {% elif file.endswith('.mp4') %}
+
+                    <video controls class="attachment-video">
+                        <source src="/uploads/{{ case_number }}/{{ file }}">
+                    </video>
+
+                {% else %}
+
+                    <a
+                        href="/uploads/{{ case_number }}/{{ file }}"
+                        target="_blank"
+                        class="btn"
+                    >
+                        Open File
+                    </a>
+
+                {% endif %}
+
+                <div class="attachment-actions">
+
+                    <a
+                        href="/uploads/{{ case_number }}/{{ file }}"
+                        download
+                        class="btn-small"
+                    >
+                        Download
+                    </a>
+
+                    <form
+                        method="POST"
+                        action="/delete-attachment"
+                        onsubmit="return confirm('Delete this attachment?')"
+                    >
+                        <input type="hidden" name="case_number" value="{{ case_number }}">
+                        <input type="hidden" name="filename" value="{{ file }}">
+
+                        <button type="submit" class="btn-danger">
+                            Delete
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <div class="timeline-box">
+
+        <h2>Service Timeline</h2>
+
+        <div class="timeline-history">
+
+            {% if case_data[-1] %}
+                <pre>{{ case_data[-1] }}</pre>
+            {% else %}
+                <p>No service updates yet.</p>
+            {% endif %}
+
+        </div>
+
+        <form method="POST" action="/add-timeline-update">
+
+            <input type="hidden" name="case_type" value="{{ case_type }}">
+            <input type="hidden" name="case_number" value="{{ case_number }}">
+
+            <textarea
+                name="timeline_update"
+                placeholder="Add technician update..."
+                required
+            ></textarea>
+
+            <button type="submit">
+                Add Timeline Update
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+</body>
+</html>

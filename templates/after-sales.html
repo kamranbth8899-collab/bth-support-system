@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>After-Sales Support</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+  <div class="logo">BTH Ceramic Equipment</div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/products">Products</a>
+    <a href="/support">Support</a>
+    <a href="/contact">Contact</a>
+  </nav>
+</header>
+
+<section class="form-page">
+  <h1>After-Sales Technical Support</h1>
+  <p>Submit your technical issue and our support team will review it.</p>
+
+  <form class="support-form" action="/after-sales" method="POST" enctype="multipart/form-data">
+
+    <input type="text" name="customer_name" placeholder="Customer Name" required>
+
+    <input type="email" name="email" placeholder="Email Address" required>
+
+    <input type="text" name="phone" placeholder="WhatsApp / Phone" required>
+
+    <input type="text" name="product_model" placeholder="Product Model" required>
+
+    <input type="text" name="serial_number" placeholder="Serial Number" required>
+
+    <input
+      type="text"
+      name="purchase_channel"
+      placeholder="Purchase Channel / Distributor (Example: Ceramic Shop, Local Dealer)"
+      required
+    >
+
+    <select name="issue_type" required>
+      <option value="">Select Issue Type</option>
+      <option>Machine not working</option>
+      <option>Foot pedal issue</option>
+      <option>Noise problem</option>
+      <option>Wheelhead issue</option>
+      <option>Electrical issue</option>
+      <option>Damaged during shipping</option>
+      <option>Other</option>
+    </select>
+
+    <textarea name="issue_description" placeholder="Issue Description" required></textarea>
+
+    <label>Upload Photos</label>
+    <input type="file" name="photos" multiple>
+
+    <label>Upload Videos</label>
+    <input type="file" name="videos" multiple>
+
+    <textarea name="notes" placeholder="Additional Notes"></textarea>
+
+    <button type="submit">Submit Support Request</button>
+
+  </form>
+</section>
+
+<footer>
+  <p>© 2026 BTH Ceramic Equipment</p>
+</footer>
+
+</body>
+</html>

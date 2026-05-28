@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Case</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        BTH Support Tracking
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/support">Support Center</a>
+        <a href="/contact">Contact</a>
+    </nav>
+
+</header>
+
+
+<section class="track-page">
+
+    <div class="track-card">
+
+        <h1>Track Your Support Case</h1>
+
+        <p class="track-intro">
+            Enter your case number to check the latest support progress.
+        </p>
+
+        <form method="POST" class="track-form">
+
+            <input
+                type="text"
+                name="case_number"
+                placeholder="Enter Case Number, e.g. AS-20260528-483"
+                required
+            >
+
+            <button type="submit">
+                Track Case
+            </button>
+
+        </form>
+
+    </div>
+
+
+    {% if case_data %}
+
+    <div class="tracking-result">
+
+        <h2>Case Status</h2>
+
+        <div class="tracking-status-box">
+
+            <div>
+                <strong>Case Number</strong>
+                <p>{{ case_data[1] }}</p>
+            </div>
+
+            <div>
+                <strong>Status</strong>
+                <p class="status-badge">
+                    {{ case_data[2] }}
+                </p>
+            </div>
+
+            <div>
+                <strong>Created Date</strong>
+                <p>{{ case_data[-4] }}</p>
+            </div>
+
+            <div>
+                <strong>Last Updated</strong>
+                <p>{{ case_data[-3] }}</p>
+            </div>
+
+            <div>
+                <strong>Completion Date</strong>
+                <p>
+                    {% if case_data[-2] %}
+                        {{ case_data[-2] }}
+                    {% else %}
+                        Not completed yet
+                    {% endif %}
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="progress-box">
+
+            <h2>Support Progress</h2>
+
+            <div class="progress-step active">
+                <span>✓</span>
+                <p>Case Submitted</p>
+            </div>
+
+            <div class="progress-step {% if case_data[2] in ['In Progress', 'Waiting Parts', 'Solved', 'Closed'] %}active{% endif %}">
+                <span>✓</span>
+                <p>Technician Reviewing</p>
+            </div>
+
+            <div class="progress-step {% if case_data[2] in ['Waiting Parts', 'Solved', 'Closed'] %}active{% endif %}">
+                <span>✓</span>
+                <p>Support In Progress</p>
+            </div>
+
+            <div class="progress-step {% if case_data[2] in ['Solved', 'Closed'] %}active{% endif %}">
+                <span>✓</span>
+                <p>Case Completed</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    {% if not_found %}
+
+    <div class="track-error">
+        Case number not found. Please check your case number and try again.
+    </div>
+
+    {% endif %}
+
+</section>
+
+
+<footer>
+    <p>© 2026 BTH Ceramic Equipment</p>
+</footer>
+
+</body>
+</html>
